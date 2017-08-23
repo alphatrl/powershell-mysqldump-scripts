@@ -44,4 +44,7 @@ Script to backup and encrypt MySQL database
 Non-PowerShell files
 #### my.cnf
 File that contains credentials to log into MySQL database.
-Ensure that it is read and executable only.
+#### sample.priv.pem
+A sample private key
+#### sample.pub.pem
+A sample public key  
