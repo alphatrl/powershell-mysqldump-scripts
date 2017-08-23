@@ -1,5 +1,10 @@
+# Declare variables
+$path = "/backups"                                          # path of backup folder
+$logFile = "automate-mysqldump.log"                         # path of log file
+$configFile = "others/my.cnf"                               # path of my.cnf file
+$pubKeyPath = "PUBLIC/KEY/PATH/mysqldump-secure.pub.pem"    # path of public key to decrypt files
+
 # Navigate to the backups folder
-$path = "/backups"
 Set-Location $path
 
 # get today's date to name today backup folder
@@ -22,9 +27,7 @@ if (-NOT (Test-Path $date)){
 Add-Content $logFile "[$date]: Entering $((Get-Location).path)"
 
 # prepare encryption keys to encrypt backup files
-# get path of public key
 # do not proceed if public key is not found
-$pubKeyPath = "PUBLIC/KEY/PATH/mysqldump-secure.pub.pem"
 if (-NOT (Test-Path $pubKeyPath)) {
     Add-Content $logFile "[$date]: Public Key not found. Exiting program`n"
     EXIT # stop program from runnning
@@ -32,7 +35,7 @@ if (-NOT (Test-Path $pubKeyPath)) {
 Add-Content $logFile "[$date]: Public Key exist. Proceeding with backup"
 
 # invoke mysqldump and output to an encrypted file
-mysqldump --defaults-file=my.cnf --single-transaction -u root --all-databases  | openssl smime -encrypt -binary -text -aes256 -out $date/database-backup.sql.enc -outform DER $pubKeyPath
+mysqldump --defaults-file=$configFile --single-transaction -u root --all-databases  | openssl smime -encrypt -binary -text -aes256 -out $date/database-backup.sql.enc -outform DER $pubKeyPath
 Add-Content $logFile "[$date]: databases (encrypted) has been backed up"
 
 Add-Content $logFile ""

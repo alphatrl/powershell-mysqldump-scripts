@@ -1,5 +1,9 @@
+# Declare variables
+$path = "/backups"                                          # path of backup folder
+$logFile = "automate-mysqldump.log"                         # path of log file
+$privKeyPath = "PRIVATE/KEY/PATH/mysqldump-secure.priv.pem" # path of private key to decrypt files
+
 # Navigate to the backups folder
-$path = "/backups"
 Set-Location $path
 
 # get today's date to name today backup folder
@@ -7,7 +11,6 @@ $date = Get-Date -UFormat "%Y-%m-%d"
 
 # Check for log file
 # Create if not found
-$logFile = "automate-mysqldump.log"
 if (-NOT (Test-Path $logFile)) {
     New-Item -Path $logFile
     Add-Content $logFile "Created on: $date`n"
@@ -21,11 +24,9 @@ if (-NOT (Test-Path $date)){
 # Set-Location $date
 Add-Content $logFile "[$date]: Entering $((Get-Location).path)"
 
-# prepare encryption keys to encrypt backup files
-# get path of public key
-# do not proceed if public key is not found
-$privKeyPath = "PRIVATE/KEY/PATH/mysqldump-secure.priv.pem"
-if (-NOT (Test-Path $pubKeyPath)) {
+# prepare decryption key to decrypt backup files
+# do not proceed if private key is not found
+if (-NOT (Test-Path $privKeyPath)) {
     Add-Content $logFile "[$date]: Private Key not found. Exiting program`n"
     EXIT # stop program from runnning
 }
