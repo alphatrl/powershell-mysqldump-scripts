@@ -27,7 +27,7 @@ if (-NOT (Test-Path $date)) {
 Add-Content $logFile "[$date]: Starting mysqldump"
 
 # invoke mysqldump - insert mysqldump statement
-mysqldump --defaults-file=$configFile -u root --all-databases > $date/database-backup.sql
+mysqldump --defaults-file=$configFile -r $date/database-backup.sql -u root --all-databases 
 Add-Content $logFile "[$date]: Backup for databases are completed"
 
 Add-Content $logFile ""

@@ -1,13 +1,8 @@
 # Script `mysqldump` on PowerShell
-Automation of `mysqldump` using PowerShell
+Scripts to use `mysqldump` on Windows OS
 
 # Key Features
-- Minimal installation required
-- Encrypt and decrypt SQL backups using the scripts provided
-- Cross Platform
-    - Windows
-    - macOS
-    - Linux
+- PowerShell Scripts to run your mysqldump on Windows
 
 # Getting Started
 These instructions will help get you started with the installation of these scripts
@@ -26,25 +21,23 @@ These instructions will help get you started with the installation of these scri
     - `$privKeyPath // path of the private key`
 3. Automate backups
     * Windows: Use Task Scheduler to run the scripts automatically.
-    * macOS: In Progress
-    * Linux: In Progress
 
 ## Contents in repository
 ### mysqldump-backup.ps1
 Script for backing up MySQL database. SQL files are not encrypted at all
 
-### mysqldump-secure
-Encrypting and Decrypting your MySQL database. Do not loose your public and private keys.
+### mysqldump-basic
+For remote backups or backups on your database server machine
+
+### mysqlpki
+Encrypt and decrypt you sql file dumps on your server machine and client machine (FTP not included)
 #### mysqldump-decrypt-backup.ps1
 Script to decrypt encrypted MySQL backups
 #### mysqldump-encrypt-backup.ps1
-Script to backup and encrypt MySQL database
+Script to backup and encrypt MySQL backups
 
 ### others
 Non-PowerShell files
 #### my.cnf
 File that contains credentials to log into MySQL database.
-#### sample.priv.pem
-A sample private key
-#### sample.pub.pem
-A sample public key  
+
