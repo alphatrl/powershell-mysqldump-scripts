@@ -23,13 +23,10 @@ These instructions will help get you started with the installation of these scri
     * Windows: Use Task Scheduler to run the scripts automatically.
 
 ## Contents in repository
-### mysqldump-backup.ps1
-Script for backing up MySQL database. SQL files are not encrypted at all
-
 ### mysqldump-basic
 For remote backups or backups on your database server machine
 
-### mysqlpki
+### mysqldump-pki
 Encrypt and decrypt you sql file dumps on your server machine and client machine (FTP not included)
 #### mysqldump-decrypt-backup.ps1
 Script to decrypt encrypted MySQL backups
@@ -40,4 +37,3 @@ Script to backup and encrypt MySQL backups
 Non-PowerShell files
 #### my.cnf
 File that contains credentials to log into MySQL database.
-
